@@ -38,6 +38,7 @@ Go to 'Visual Adverts' > 'Adverts' menu and click on 'Add New' to create new adv
 = Settings option =
 
 Go to 'Visual Adverts' > 'Settings' menu and configure:
+
 * **Advert Image Size**. NOTICE: Regenerate the thumbnails of existing images in the WordPress media gallery after resizing
 * **Refresh Time (msec)**. Set your custom time between Adverts updates in sidebar
 * **Animation Speed (msec)**. Set your custom time for Animation effects
