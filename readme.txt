@@ -1,4 +1,4 @@
-=== WP Visual Adverts for sidebars ===
+=== WP Visual Adverts ===
 Contributors: webcodin
 Tags: ad, advert, adverts, visual adverts, widget, sidebar, ajax
 Requires at least: 3.5.0
