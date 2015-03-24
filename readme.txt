@@ -12,7 +12,9 @@ Adding visual adverts to sidebars have never been easier
 == Description ==
 
 Adding your visual adverts to sidebars becoming very easy and fascinating activity with WP Visual Adverts plugin from now on. We are happy to present you the new plugin for your WordPress website that allows to fill desired sidebars with any visual adverts.
+
 Sidebar adverts shall pleasure your website visitors. Therefore WP Visual Adverts will make your website more attractive with smooth and floating Adverts appearance. 
+
 Create your ads with pictures and keep website visitors updated with any news, advertisement or information you want in a simple way.
 
 = Features =
@@ -36,7 +38,6 @@ Go to 'Visual Adverts' > 'Adverts' menu and click on 'Add New' to create new adv
 = Settings option =
 
 Go to 'Visual Adverts' > 'Settings' menu and configure:
-
 * **Advert Image Size**. NOTICE: Regenerate the thumbnails of existing images in the WordPress media gallery after resizing
 * **Refresh Time (msec)**. Set your custom time between Adverts updates in sidebar
 * **Animation Speed (msec)**. Set your custom time for Animation effects
