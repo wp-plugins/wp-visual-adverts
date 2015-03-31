@@ -87,6 +87,9 @@ Set 'Refresh Time' as '0' in plugin settings
 
 == Changelog ==
 
-= 1.0.0 =
+= 1.0.1 =
+* Minor bugfixing.
 
+
+= 1.0.0 =
 * Initial release.
