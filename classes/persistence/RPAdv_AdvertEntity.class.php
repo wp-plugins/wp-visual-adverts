@@ -6,6 +6,7 @@ class RPAdv_AdvertEntity extends Agp_Entity {
     private $description;
     private $link;
     private $image;
+    private $categories;
     
     public function __construct($data) {
         $default = array(
@@ -14,6 +15,7 @@ class RPAdv_AdvertEntity extends Agp_Entity {
             'description' => NULL, 
             'link' => NULL, 
             'image' => NULL, 
+            'categories' => NULL, 
         );
 
         parent::__construct($data, $default); 
@@ -54,5 +56,26 @@ class RPAdv_AdvertEntity extends Agp_Entity {
         $this->image = $image;
         return $this;
     }
+
+    public function getCategories() {
+        return $this->categories;
+    }
+
+    public function setCategories($categories) {
+        $this->categories = $categories;
+        return $this;
+    }
     
+    public function hasCategories($data = array()) {
+        $result = FALSE;
+        if (!empty($data)) {
+            if (!is_array($data)) {
+                $data = array($data);
+            }
+            foreach($data as $category) {
+               $result = $result || in_array($category, $this->categories); 
+            }
+        }
+        return $result;
+    }
 }

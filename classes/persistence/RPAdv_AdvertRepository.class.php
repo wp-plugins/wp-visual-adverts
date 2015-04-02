@@ -4,6 +4,8 @@ class RPAdv_AdvertRepository extends Agp_RepositoryAbstract {
     
     public $entityClass ='RPAdv_AdvertEntity';
 
+    private $categoryFilter = array();
+    
     public function init() {
     }
     
@@ -29,6 +31,20 @@ class RPAdv_AdvertRepository extends Agp_RepositoryAbstract {
                 'link' => get_post_meta(get_the_ID(), 'rpadv_link', TRUE),
                 'image' => !empty($image[0]) ? $image[0] : '',
             );
+
+            if (taxonomy_exists('advert-category')) {
+                $terms = wp_get_post_terms( get_the_ID(), 'advert-category' );
+                $categories = array();
+                if (!empty($terms)) {
+                    foreach($terms as $term) {
+                        $categories[] = $term->term_id;
+                    }
+                }
+                $data[get_the_ID()]['categories'] = $categories;
+            } else {
+                $data[get_the_ID()]['categories'] = array();
+            }
+            
         endwhile;
         wp_reset_query();
         
@@ -42,4 +58,47 @@ class RPAdv_AdvertRepository extends Agp_RepositoryAbstract {
         return $data;
     }
 
+    public function getCategoryFilter() {
+        return $this->categoryFilter;
+    }
+
+    public function setCategoryFilter($categoryFilter) {
+        $this->categoryFilter = array();
+        if (!empty($categoryFilter)) {
+            if (is_array($categoryFilter)) {
+                $this->categoryFilter = $categoryFilter;    
+            } else {
+                $this->categoryFilter = array($categoryFilter);    
+            }
+        }
+        return $this;
+    }
+    
+    public function applyCategoryFilter($data) {
+        $result = array();
+        $filter = $this->getCategoryFilter();
+        foreach ($data as $id => $entity) {
+            if (empty($filter) || $entity->hasCategories($filter)) {
+                $result[$id] = $entity;
+            }
+        }
+        return $result;
+    }
+
+    
+    public function getAll () {
+        return $this->applyCategoryFilter(parent::getAll());
+    }
+
+    public function getFirst () {
+        $data = $this->getAll();
+        if (!empty($data)) {
+            return $result = reset($data);    
+        }
+    }        
+    
+    public function getCount () {
+        return count($this->getAll());
+    }        
+    
 }

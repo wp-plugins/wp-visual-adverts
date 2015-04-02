@@ -5,7 +5,7 @@ Requires at least: 3.5.0
 Tested up to: 4.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
-Stable tag: 1.0.1
+Stable tag: trunk
 
 Adding visual adverts to sidebars have never been easier
 
@@ -87,9 +87,12 @@ Set 'Refresh Time' as '0' in plugin settings
 
 == Changelog ==
 
+= 1.0.2 =
+* Fixed issue: "plugin stops functioning after a few refreshes"
+* Added: multiple widgets contain different adverts after refreshing
+
 = 1.0.1 =
 * Minor bugfixing.
-
 
 = 1.0.0 =
 * Initial release.

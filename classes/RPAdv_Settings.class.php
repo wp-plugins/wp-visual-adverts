@@ -72,11 +72,31 @@ class RPAdv_Settings extends Agp_Module {
     }
 
     public function adminMenu () {
-        add_menu_page('Visual Adverts', 'Visual Adverts', 'manage_options', 'adverts');            
+        add_menu_page('Visual Adverts', 'Visual Adverts', 'manage_options', 'adverts');   
+        if (taxonomy_exists('advert-category')) {
+            add_submenu_page('adverts', 'Categories', 'Categories', 'manage_options', 'edit-tags.php?taxonomy=advert-category&post_type=adverts');                        
+        }    
         add_submenu_page('adverts', 'Settings', 'Settings', 'administrator', 'adverts-settings', array($this, 'renderSettingsPage'));                
         register_setting( 'rpadv-settings', 'rpadv_settings', array($this, 'sanitizeSettings') );                
+        add_filter( 'parent_file', array($this, 'currentMenu') );        
     }
     
+    function currentMenu($parent_file){
+        global $submenu_file, $current_screen, $pagenow;
+
+        if($current_screen->post_type == 'adverts') {
+
+            if($pagenow == 'edit-tags.php'){
+                $submenu_file = 'edit-tags.php?taxonomy=advert-category&post_type='.$current_screen->post_type;
+            }
+
+            $parent_file = 'adverts';
+
+        }
+
+        return $parent_file;
+
+    }    
 
     public function sanitizeSettings ($input) {
         $output = array();    

@@ -36,6 +36,22 @@ class RPAdv_Ajax extends Agp_AjaxAbstract {
      * Refresh Adverts Action
      */
     public function advertsRefresh($data) {
-        echo RPAdv()->getTemplate('rpadv-widget-list', 'isAjax');
+        //http_response_code(503);
+        //die();
+        
+        $id = str_replace('rpadv_widget-', '', $data['id']);
+        $obj = new RPAdv_AdvertWidget();
+        $settings = $obj->get_settings();
+        $settings = $settings[$id];
+        
+        $params = array(
+            'id' => $data['id'],
+            'isAjax' => TRUE,
+        );
+        
+        if (taxonomy_exists('advert-category') && !empty($settings['taxonomy_term'])) {
+            $params['term'] = $settings['taxonomy_term'];
+        }
+        RPAdv()->showWidget($params);
     }
 }

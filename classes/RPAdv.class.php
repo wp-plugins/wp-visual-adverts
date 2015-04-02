@@ -75,8 +75,6 @@ class RPAdv extends Agp_Module {
     
     public function init () {
         $this->advertRepository->refreshRepository();
-        
-        $this->getAdverts();
     }
     
     public function setupTheme() {
@@ -121,7 +119,9 @@ class RPAdv extends Agp_Module {
             'ajax_nonce' => wp_create_nonce('ajax_atf_nonce'),        
             'refreshTime' => $this->settings->getRefreshTime(),
             'animationSpeed' => $this->settings->getAnimationSpeed(),
-            'advertCount' => $this->advertRepository->getCount(),
+            'advertCountPage' => $this->settings->getAdvertCount(),
+            'advertCount' => array(),
+            
         ));  
 
         wp_enqueue_style('rpadv-css', $this->getAssetUrl('css/style.css'));                    
@@ -156,5 +156,24 @@ class RPAdv extends Agp_Module {
             return $result;            
         }
     }    
+    
+    public function showWidget ($params) {
+        $id = !empty($params['id']) ? $params['id'] : '';
+        $term = !empty($params['term']) ? $params['term'] : '';
+        $isAjax = !empty($params['isAjax']) ? 'isAjax' : '';
+        $template = !empty($params['isAjax']) ? 'rpadv-widget-list' : 'rpadv-widget';
+
+        if (!empty($id))  {
+            $this->advertRepository->setCategoryFilter($term);
+            
+        ?>
+        <script type="text/javascript">
+            ajax_rpadv.advertCount["<?php echo $id;?>"] = <?php echo $this->advertRepository->getCount(); ?>;
+        </script>
+        <?php                
+            echo $this->getTemplate($template, $isAjax);                            
+        }
+        
+    }
     
 }

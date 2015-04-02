@@ -21,7 +21,12 @@ class RPAdv_AdvertWidget extends WP_Widget {
         if (!empty( $instance['title'])) {
             echo $args['before_title'] . apply_filters( 'widget_title', $instance['title'] ). $args['after_title'];
         }
-        echo RPAdv()->getTemplate('rpadv-widget', $this->id);                
+      
+        RPAdv()->showWidget(array(
+                'id' => $this->id,
+                'term' => !empty($instance['taxonomy_term']) && taxonomy_exists('advert-category') ? $instance['taxonomy_term'] : array(),
+            )
+        );
         echo $args['after_widget'];
 	}
 
@@ -32,10 +37,13 @@ class RPAdv_AdvertWidget extends WP_Widget {
 	 */
 	public function form( $instance ) {
 		$title = !empty($instance['title']) ? $instance['title'] : '';
+        $taxonomy_term = !empty($instance['taxonomy_term']) ? $instance['taxonomy_term'] : '';                
     ?>
         <p><?php $this->renderTitleField($title); ?></p>
+        <p><?php $this->renderTaxonomyTermField('advert-category', $taxonomy_term); ?></p>        
     <?php    
 	}
+    
     
 	/**
 	 * Processing widget options on save
@@ -47,7 +55,8 @@ class RPAdv_AdvertWidget extends WP_Widget {
 		$instance = array();
         
 		$instance['title'] = (!empty($new_instance['title'])) ? strip_tags( $new_instance['title'] ) : '';
-
+        $instance['taxonomy_term'] = (!empty($new_instance['taxonomy_term'])) ? strip_tags( $new_instance['taxonomy_term'] ) : '';        
+        
 		return $instance;
 	}    
     
@@ -58,6 +67,29 @@ class RPAdv_AdvertWidget extends WP_Widget {
     <?php    
     }    
 
+    public function renderTaxonomyTermField ($taxonomy, $current_term = '') {
+        if (taxonomy_exists('advert-category')) :
+        $args = array(
+            'orderby'       => 'name', 
+            'order'         => 'ASC',
+            'hide_empty'    => false, 
+            'fields'        => 'all', 
+            'hierarchical'  => true, 
+        ); 
+
+        $terms = get_terms( $taxonomy, $args ); 
+    ?>    
+        <label for="<?php echo esc_attr( $this->get_field_id( 'taxonomy_term' ) ); ?>"><?php _e( 'Category:' ); ?></label>
+        <select id="<?php echo esc_attr( $this->get_field_id( 'taxonomy_term' ) ); ?>" class="taxonomy-select widefat" name="<?php echo esc_attr( $this->get_field_name( 'taxonomy_term' ) ); ?>">
+        <option value=""<?php selected( $current_term, '' ); ?>>All Adverts</option>            
+        <?php foreach ( $terms as $term ) : ?>
+            <option value="<?php echo $term->term_id; ?>"<?php selected( $current_term, $term->term_id ); ?>><?php echo $term->name; ?></option>
+        <?php endforeach; ?>
+        </select>
+    <?php  
+        endif;
+    }    
+    
 }
 
     
