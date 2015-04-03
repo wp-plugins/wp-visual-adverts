@@ -3,7 +3,7 @@
  * Plugin Name: WP Visual Adverts
  * Plugin URI: https://wordpress.org/plugins/wp-visual-adverts/
  * Description: A plugin for WordPress that let you add visual adverts to sidebars
- * Version: 1.0.2
+ * Version: 1.0.3
  * Author: Webcodin
  * Author URI: https://profiles.wordpress.org/webcodin/
  * License: GPL2

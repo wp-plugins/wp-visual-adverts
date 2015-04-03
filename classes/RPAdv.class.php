@@ -163,16 +163,19 @@ class RPAdv extends Agp_Module {
         $isAjax = !empty($params['isAjax']) ? 'isAjax' : '';
         $template = !empty($params['isAjax']) ? 'rpadv-widget-list' : 'rpadv-widget';
 
-        if (!empty($id))  {
+        if (!empty($id)) :
             $this->advertRepository->setCategoryFilter($term);
-            
+            if (empty($isAjax)) :
         ?>
         <script type="text/javascript">
             ajax_rpadv.advertCount["<?php echo $id;?>"] = <?php echo $this->advertRepository->getCount(); ?>;
         </script>
         <?php                
+            endif;
+            
             echo $this->getTemplate($template, $isAjax);                            
-        }
+            
+        endif;
         
     }
     
