@@ -64,7 +64,8 @@ To add a widget to the sidebar, go to the menu: "Appearance"> "Widgets", select 
 Following options are available for configuring in the widget:
 
 * **Title** - allows to set widget headline;
-* **Category** - allows to set ads group for displaying; by default will be displayed all existed adverts.
+* **Category** - allows to set ads group for displaying; by default will be displayed all existed adverts;
+* **Font Color** - allows to set widget text color.
 
 More information can be found in the section [screenshots](https://wordpress.org/plugins/wp-visual-adverts/screenshots/) and [FAQ](https://wordpress.org/plugins/wp-visual-adverts/faq/).
 
@@ -74,7 +75,7 @@ To change the global plugin settings, go to the menu: "Visual Adverts"> "Setting
 
 You can configure the following options:
 
-* **Advert Image Size** - allows to set default custom size of the ad image.<br>**NB! Please use "Regenerate Thumbnails" plugin (https://wordpress.org/plugins/regenerate-thumbnails/) or similar one for properly displaying of custom thumbnails after customization of this plugin option;**
+* **Advert Image Size** - allows to set default custom size of the ad image. <br>**NB! Please use "Regenerate Thumbnails" plugin (https://wordpress.org/plugins/regenerate-thumbnails/) or similar one for properly displaying of custom thumbnails after customization of this plugin option;**
 * **Refresh Time** (msec) - allows to set custom time between ads updates; in order if you need to disable ads refreshing, you can set this option to zero value;
 * **Animation Speed** (msec) - allows to set speed for fade in/fade out animation effect;
 * **Advert Count** - allows to set custom number of displayed ads inside groups.
