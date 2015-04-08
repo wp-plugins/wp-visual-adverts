@@ -48,6 +48,7 @@ To create an ad, go to the menu: "Visual Adverts"> "Adverts"
 Click on the "Add New" to create a new ad.
 
 To create different types of ads you can use the following parameters:
+
 * **Post Title** - allows to set ad headline;
 * **Post Descriptions** - allows to set ad description;
 * **Link** - allows to set external or internal ad link;
@@ -61,6 +62,7 @@ More information can be found in the section [screenshots](https://wordpress.org
 To add a widget to the sidebar, go to the menu: "Appearance"> "Widgets", select widgets "WP Visual Adverts" and drag it to the desired sidebar.
 
 Following options are available for configuring in the widget:
+
 * **Title** - allows to set widget headline;
 * **Category** - allows to set ads group for displaying; by default will be displayed all existed adverts.
 
@@ -71,6 +73,7 @@ More information can be found in the section [screenshots](https://wordpress.org
 To change the global plugin settings, go to the menu: "Visual Adverts"> "Settings".
 
 You can configure the following options:
+
 * **Advert Image Size** - allows to set default custom size of the ad image.<br>**NB! Please use "Regenerate Thumbnails" plugin (https://wordpress.org/plugins/regenerate-thumbnails/) or similar one for properly displaying of custom thumbnails after customization of this plugin option;**
 * **Refresh Time** (msec) - allows to set custom time between ads updates; in order if you need to disable ads refreshing, you can set this option to zero value;
 * **Animation Speed"** (msec) - allows to set speed for fade in/fade out animation effect;
