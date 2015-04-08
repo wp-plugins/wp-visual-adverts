@@ -52,6 +52,7 @@ class RPAdv_Ajax extends Agp_AjaxAbstract {
         if (taxonomy_exists('advert-category') && !empty($settings['taxonomy_term'])) {
             $params['term'] = $settings['taxonomy_term'];
         }
+        $params['color'] = !empty($settings['color']) ? $settings['color'] : '';        
         RPAdv()->showWidget($params);
     }
 }

@@ -7,6 +7,7 @@ class RPAdv_AdvertEntity extends Agp_Entity {
     private $link;
     private $image;
     private $categories;
+    private $color;
     
     public function __construct($data) {
         $default = array(
@@ -66,6 +67,15 @@ class RPAdv_AdvertEntity extends Agp_Entity {
         return $this;
     }
     
+    public function getColor() {
+        return $this->color;
+    }
+
+    public function setColor($color) {
+        $this->color = $color;
+        return $this;
+    }
+        
     public function hasCategories($data = array()) {
         $result = FALSE;
         if (!empty($data)) {

@@ -85,6 +85,11 @@ class RPAdv_AdvertRepository extends Agp_RepositoryAbstract {
         return $result;
     }
 
+    public function applyColor($color) {
+        foreach ($this->getAll() as $entity) {
+            $entity->setColor($color);
+        }
+    }
     
     public function getAll () {
         return $this->applyCategoryFilter(parent::getAll());

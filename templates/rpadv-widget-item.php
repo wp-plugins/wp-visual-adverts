@@ -1,12 +1,13 @@
 <?php
     $advert = $params;
     if (!empty($advert)) :
+        $color = $advert->getColor();
 
 ?>
-    <div class="visual-adverts-item" data-id="<?php echo $advert->getId();?>">
+<div class="visual-adverts-item" data-id="<?php echo $advert->getId();?>"<?php echo !empty($color) && !$advert->getLink() ? ' style="color: '.$color.';"' : '';?>>
 
         <?php if ($advert->getLink()) : ?>
-            <a href="<?php echo $advert->getLink();?>" title="<?php echo $advert->getTitle();?>" target="_blank">
+            <a href="<?php echo $advert->getLink();?>" title="<?php echo $advert->getTitle();?>" target="_blank"<?php echo !empty($color) ? ' style="color: '.$color.';"' : '';?>>
         <?php endif; ?>
 
             <?php if ($advert->getTitle()) : ?>

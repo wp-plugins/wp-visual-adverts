@@ -67,7 +67,7 @@ function rpadv_adverts_init() {
       'rewrite'            => array( 'slug' =>  _x( 'advert-category', 'URL slug'),  'with_front' => false ),
     );  
 
-    //register_taxonomy( 'advert-category', 'adverts', $args );     
+    register_taxonomy( 'advert-category', 'adverts', $args );     
 
     flush_rewrite_rules();    
 }

@@ -66,11 +66,13 @@ class RPAdv extends Agp_Module {
         $this->settings = new RPAdv_Settings($this->getBaseDir());
         
         add_action( 'init', array($this, 'init' ), 999 );        
-        add_action( 'wp_enqueue_scripts', array($this, 'enqueueScripts' ) );                
+        add_action( 'wp_enqueue_scripts', array($this, 'enqueueScripts' ) );    
+        add_action( 'admin_enqueue_scripts', array($this, 'enqueueAdminScripts' ));                    
         add_action( 'widgets_init', array($this, 'initWidgets' ) );
         add_action( 'after_setup_theme', array($this, 'setupTheme' ) );
         add_action( 'add_meta_boxes', array($this, 'addMetaboxes' ) );
-        add_action( 'save_post', array($this, 'saveMetaboxes' ), 1, 2); // 
+        add_action( 'save_post', array($this, 'saveMetaboxes' ), 1, 2);
+        add_action( 'load-widgets.php', array($this, 'loadWidget' ) );
     }
     
     public function init () {
@@ -127,6 +129,17 @@ class RPAdv extends Agp_Module {
         wp_enqueue_style('rpadv-css', $this->getAssetUrl('css/style.css'));                    
     }        
     
+    
+    public function enqueueAdminScripts () {
+        wp_enqueue_script( 'rpadv', $this->getAssetUrl('js/admin.js'), array('jquery', 'wp-color-picker') );                                                         
+        wp_enqueue_style( 'rpadv-css', $this->getAssetUrl('css/admin.css'), array('wp-color-picker') );                    
+    }    
+    
+    public function loadWidget () {
+        wp_enqueue_style( 'wp-color-picker' );        
+        wp_enqueue_script( 'wp-color-picker' );            
+    }
+    
     public function initWidgets() {
         register_widget('RPAdv_AdvertWidget');
     }
@@ -160,11 +173,13 @@ class RPAdv extends Agp_Module {
     public function showWidget ($params) {
         $id = !empty($params['id']) ? $params['id'] : '';
         $term = !empty($params['term']) ? $params['term'] : '';
+        $color = !empty($params['color']) ? $params['color'] : '';        
         $isAjax = !empty($params['isAjax']) ? 'isAjax' : '';
         $template = !empty($params['isAjax']) ? 'rpadv-widget-list' : 'rpadv-widget';
 
         if (!empty($id)) :
             $this->advertRepository->setCategoryFilter($term);
+            $this->advertRepository->applyColor($color);
             if (empty($isAjax)) :
         ?>
         <script type="text/javascript">

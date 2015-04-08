@@ -25,6 +25,7 @@ class RPAdv_AdvertWidget extends WP_Widget {
         RPAdv()->showWidget(array(
                 'id' => $this->id,
                 'term' => !empty($instance['taxonomy_term']) && taxonomy_exists('advert-category') ? $instance['taxonomy_term'] : array(),
+                'color' => !empty($instance['color']) ? $instance['color'] : '',            
             )
         );
         echo $args['after_widget'];
@@ -38,9 +39,11 @@ class RPAdv_AdvertWidget extends WP_Widget {
 	public function form( $instance ) {
 		$title = !empty($instance['title']) ? $instance['title'] : '';
         $taxonomy_term = !empty($instance['taxonomy_term']) ? $instance['taxonomy_term'] : '';                
+        $color = !empty($instance['color']) ? $instance['color'] : '';
     ?>
         <p><?php $this->renderTitleField($title); ?></p>
         <p><?php $this->renderTaxonomyTermField('advert-category', $taxonomy_term); ?></p>        
+        <p><?php $this->renderTextColorField($color); ?></p>                
     <?php    
 	}
     
@@ -56,9 +59,20 @@ class RPAdv_AdvertWidget extends WP_Widget {
         
 		$instance['title'] = (!empty($new_instance['title'])) ? strip_tags( $new_instance['title'] ) : '';
         $instance['taxonomy_term'] = (!empty($new_instance['taxonomy_term'])) ? strip_tags( $new_instance['taxonomy_term'] ) : '';        
+        $instance['color'] = (!empty($new_instance['color'])) ? strip_tags( $new_instance['color'] ) : '';        
         
 		return $instance;
 	}    
+    
+    public function renderTextColorField($color) {
+    ?>
+        <script type='text/javascript'>
+            jQuery('.widgets-sortables .rpadv-color-picker').wpColorPicker();                                        
+        </script>
+        <label for="<?php echo esc_attr( $this->get_field_id( 'color' ) ); ?>" style="display:block;"><?php _e( 'Font Color:' ); ?></label> 
+        <input class="widefat rpadv-color-picker" id="<?php echo esc_attr( $this->get_field_id( 'color' ) ); ?>" name="<?php echo $this->get_field_name( 'color' ); ?>" type="text" value="<?php echo esc_attr( $color ); ?>" />        
+    <?php 
+    }
     
     public function renderTitleField ($title) {
     ?>
