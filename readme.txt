@@ -2,7 +2,7 @@
 Contributors: webcodin
 Tags: ad, ads, advert, adverts, visual adverts, widget, sidebar, ajax, WooSidebars, groups, categories
 Requires at least: 3.5.0
-Tested up to: 4.1
+Tested up to: 4.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Stable tag: trunk
@@ -139,6 +139,9 @@ Create a new ad, fill all necessary fields in including "link" field and save ad
 9. Admin Panel :: Widgets Options
 
 == Changelog ==
+
+= 1.1.1 =
+* Minor changes of the plugin core
 
 = 1.1.0 =
 * Added: adverts categories
