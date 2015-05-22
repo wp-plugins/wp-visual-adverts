@@ -6,8 +6,8 @@
             
             $(this).height($(this).find('.visual-adverts.add').outerHeight());
             
-            if (ajax_rpadv.refreshTime > 0 && ajax_rpadv.advertCount[id] > ajax_rpadv.advertCountPage ) {
-                setTimeout(function() {advertsRefresh(id)}, ajax_rpadv.refreshTime);   
+            if (ajax_rpadv.refreshTime[id] > 0 && ajax_rpadv.advertCount[id] > ajax_rpadv.advertCountPage[id] ) {
+                setTimeout(function() {advertsRefresh(id)}, ajax_rpadv.refreshTime[id]);   
             }            
         });
         
@@ -33,16 +33,16 @@
 
                     $(owner).append(data);
                     
-                    $(owner).find('.visual-adverts.add').fadeIn(ajax_rpadv.animationSpeed, function () {
+                    $(owner).find('.visual-adverts.add').fadeIn(ajax_rpadv.animationSpeed[id], function () {
                         $(owner).height($(this).outerHeight());
                     });                    
 
-                    $(owner).find('.visual-adverts.remove').fadeOut(ajax_rpadv.animationSpeed, function() {
+                    $(owner).find('.visual-adverts.remove').fadeOut(ajax_rpadv.animationSpeed[id], function() {
                         $(this).remove();  
                     });                    
 
-                    if (ajax_rpadv.refreshTime > 0 && ajax_rpadv.advertCount[id] > ajax_rpadv.advertCountPage ) {
-                        setTimeout(function() {advertsRefresh(id)}, ajax_rpadv.refreshTime);   
+                    if (ajax_rpadv.refreshTime[id] > 0 && ajax_rpadv.advertCount[id] > ajax_rpadv.advertCountPage[id] ) {
+                        setTimeout(function() {advertsRefresh(id)}, ajax_rpadv.refreshTime[id]);   
                     }
                 },
                 error: function (request, status, error) {

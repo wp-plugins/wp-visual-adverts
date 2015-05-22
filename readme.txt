@@ -24,28 +24,42 @@ With this plugin you can easily create:
 = Features =
 
 * Easily way to create ads;
-* Creation of various advert types: graphic (image), text ads, combined Ads (title / picture / description);
+* Creation of various advert types: graphic (single picture), text ads, combined Ads (title / picture / description);
 * Addition of external and internal links to the ads;
 * Grouping ads by category;
 * AJAX-update of ad groups;
 * Setting of a custom image size, number of displayed ads, and animation settings;
-* Personal text color for widgets;
 * Uses the default theme styling;
 * Compatible with WooSidebars;
-* Developers have the possibility to customize the plugin by creating a duplicate templates and styles in the active theme folder.
+* Developers have the possibility to customize the plugin by creating a duplicate templates and styles in the active theme folder;
+* **NEW!** Custom options for widgets: text color, ads number, animation options.
+ 
+= Upcoming Updates =
+* ads group shortcode for pages
+* statistic per click
 
+More information and documentation can be found in the sections [screenshots](https://wordpress.org/plugins/wp-visual-adverts/screenshots/) and [FAQ](https://wordpress.org/plugins/wp-visual-adverts/faq/).
 
-= Ad Categories Creation =
+If you want to help with plugin improvement, please leave your feedback or suggestions for future updates.
+
+== Installation ==
+
+1. Download a copy of the plugin
+2. Unzip and Upload 'wp-visual-adverts' to a sub directory in '/wp-content/plugins/'.
+3. Activate the plugin through the 'Plugins' menu in WordPress.
+
+== Frequently Asked Questions ==
+
+= How can I create ad categories =
 
 To create an ad group, go to the menu: "Visual Adverts"> "Adverts"> "Categoties".
 Set ad group name and click "Add New Category".
 
-More information can be found in the section [screenshots](https://wordpress.org/plugins/wp-visual-adverts/screenshots/) and [FAQ](https://wordpress.org/plugins/wp-visual-adverts/faq/).
+More information can be found in the section [screenshots](https://wordpress.org/plugins/wp-visual-adverts/screenshots/).
 
-= Ad Creation =
+= How can I create an ad =
 
-To create an ad, go to the menu: "Visual Adverts"> "Adverts"
-Click on the "Add New" to create a new ad.
+To create an ad, go to the menu: "Visual Adverts"> "Adverts" Click on the "Add New" to create a new ad.
 
 To create different types of ads you can use the following parameters:
 
@@ -55,7 +69,23 @@ To create different types of ads you can use the following parameters:
 * **Post Featured Image** - allows to set ad image;
 * **Advert Categories** metabox - allows to set ad categories.
 
-More information can be found in the section [screenshots](https://wordpress.org/plugins/wp-visual-adverts/screenshots/) and [FAQ](https://wordpress.org/plugins/wp-visual-adverts/faq/).
+More information can be found in the section [screenshots](https://wordpress.org/plugins/wp-visual-adverts/screenshots/).
+
+= How can I get image ad? =
+
+Create a new ad, upload featured image and save ad. Now you have ready-to-use image ad.
+
+= How can I get simple text ad? =
+
+Create a new ad, fill "Post Description" in and save ad. Now you have ready-to-use simple text ad.
+
+= How can I get text ad with headline? =
+
+Create a new ad, fill "Post Title" and "Post Description" in and save ad. Now you have ready-to-use text ad with headline.
+
+= How can I get clickable ad? =
+
+Create a new ad, fill all necessary fields in including "link" field and save ad. Now you have ready-to-use clicable.
 
 = Widgets =
 
@@ -66,8 +96,10 @@ Following options are available for configuring in the widget:
 * **Title** - allows to set widget headline;
 * **Category** - allows to set ads group for displaying; by default will be displayed all existed adverts;
 * **Font Color** - allows to set widget text color.
+* **Refresh Time**/**Animation Speed**: - allows to set animation options
+* **Advert Count** - allows to set custom number of displayed ads for widget.
 
-More information can be found in the section [screenshots](https://wordpress.org/plugins/wp-visual-adverts/screenshots/) and [FAQ](https://wordpress.org/plugins/wp-visual-adverts/faq/).
+More information can be found in the section [screenshots](https://wordpress.org/plugins/wp-visual-adverts/screenshots/).
 
 = General Settings =
 
@@ -80,18 +112,17 @@ You can configure the following options:
 * **Animation Speed** (msec) - allows to set speed for fade in/fade out animation effect;
 * **Advert Count** - allows to set custom number of displayed ads inside groups.
 
+**NB!** All options will be used as initial for all new widgets with ads after options update.
+
 More information can be found in the section [screenshots](https://wordpress.org/plugins/wp-visual-adverts/screenshots/) and [FAQ](https://wordpress.org/plugins/wp-visual-adverts/faq/).
 
-== Installation ==
+= How to disable AJAX updates of Adverts? =
 
-1. Download a copy of the plugin
-2. Unzip and Upload 'wp-visual-adverts' to a sub directory in '/wp-content/plugins/'.
-3. Activate the plugins through the 'Plugins' menu in WordPress.
-
-== Frequently Asked Questions ==
+Set "Refresh Time" as "0" in plugin settings
 
 = How can I style the widget content? =
 
+**NB!** Developers only
 The plugin includes CSS file "assets/css/style.css".
 You can copy this file in your active theme and customize it for your needs.
 Path to the styles inside the active theme:
@@ -100,31 +131,12 @@ Path to the styles inside the active theme:
 
 = How can I change the widget content? =
 
+**NB!** Developers only
 The plugin includes some templates in "templates/" folder. 
 You can copy any template in your active theme and customize it for your needs. 
 Path to the templates folder inside the active theme:
 
 [ActiveTheme]/templates/wp-visual-adverts/
-
-= How to disable AJAX updates of Adverts? =
-
-Set "Refresh Time" as "0" in plugin settings
-
-= How can I get image ad? =
-
-Create a new ad, upload featured image and save ad.  Now you have ready-to-use image ad.
-
-= How can I get simple text ad? =
-
-Create a new ad, fill "Post Description" in and save ad.  Now you have ready-to-use simple text ad.
-
-= How can I get text ad with headline? =
-
-Create a new ad, fill "Post Title" and "Post Description" in and save ad.  Now you have ready-to-use text ad with headline.
-
-= How can I get clickable ad? =
-
-Create a new ad, fill all necessary fields in including "link" field and save ad.  Now you have ready-to-use clicable.
 
 == Screenshots ==
 
@@ -139,6 +151,10 @@ Create a new ad, fill all necessary fields in including "link" field and save ad
 9. Admin Panel :: Widgets Options
 
 == Changelog ==
+
+= 1.2.0 =
+* Global changes of the plugin core
+* Added: personal options for widget: ads number & animation settings
 
 = 1.1.1 =
 * Minor changes of the plugin core

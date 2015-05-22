@@ -19,7 +19,7 @@ function rpadv_adverts_init() {
 
     $args = array(
       'labels'             => $labels, 
-      'public'             => true,
+      'public'             => false,
       'publicly_queryable' => true,
       'show_ui'            => true,
       'show_in_menu'       => 'adverts',
@@ -27,7 +27,7 @@ function rpadv_adverts_init() {
       'query_var'          => true,
       'rewrite'            => array( 'slug' =>  _x( 'adverts', 'URL slug'),  'with_front' => false ),
       'capability_type'    => 'post',
-      'has_archive'        => true,
+      'has_archive'        => false,
       'hierarchical'       => false,
       'menu_position'      => 2,
       'supports'           => array( 

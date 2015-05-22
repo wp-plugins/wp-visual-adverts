@@ -53,6 +53,17 @@ class RPAdv_Ajax extends Agp_AjaxAbstract {
             $params['term'] = $settings['taxonomy_term'];
         }
         $params['color'] = !empty($settings['color']) ? $settings['color'] : '';        
+        
+        if (isset($settings['refreshTime'])) {
+            $params['refreshTime'] = $settings['refreshTime'];    
+        }        
+        if (isset($settings['animationSpeed'])) {
+            $params['animationSpeed'] = $settings['animationSpeed'];    
+        }        
+        if (isset($settings['advertCount'])) {
+            $params['advertCount'] = $settings['advertCount'];    
+        }                        
+        
         RPAdv()->showWidget($params);
     }
 }

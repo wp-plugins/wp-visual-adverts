@@ -1,31 +1,29 @@
 <?php
 
-class RPAdv_Settings extends Agp_Module {
-
-    private $imageWidth;
-    
-    private $imageHeight;
-    
-    private $imageCrop;
-    
-    private $refreshTime;
-    
-    private $advertCount;
-    
-    private $animationSpeed;
+class RPAdv_Settings extends Agp_SettingsAbstract {
     
     /**
-     * @var object The single instance of the class 
+     * The single instance of the class 
+     * 
+     * @var object 
      */
     protected static $_instance = null;    
+
+    /**
+     * Parent Module
+     * 
+     * @var Agp_Module
+     */
+    protected static $_parentModule;
     
 	/**
 	 * Main Instance
 	 *
-     * @return Visualizer
+     * @return object
 	 */
-	public static function instance() {
+	public static function instance($parentModule = NULL) {
 		if ( is_null( self::$_instance ) ) {
+            self::$_parentModule = $parentModule;            
 			self::$_instance = new self();
 		}
 		return self::$_instance;
@@ -43,41 +41,32 @@ class RPAdv_Settings extends Agp_Module {
 	public function __wakeup() {
     }        
     
-    public function __construct($baseDir) {
-        parent::__construct($baseDir);        
-        
+    /**
+     * Constructor 
+     * 
+     * @param Agp_Module $parentModule
+     */
+    public function __construct() {
         //delete_option('rpadv_settings');
         
-        $options = $this->getOptions();
-        if (empty($options)) {
-            $options = array(
-                'rpadv-image-width' => '400',
-                'rpadv-image-height' => '250',
-                'rpadv-image-crop' => '1',
-                'rpadv-refresh-time' => 5000,
-                'rpadv-advert-count' => 3,
-                'rpadv-animation-speed' => 400,
-            );
-            update_option('rpadv_settings', $options);
-        }
+        $config = include ($this->getParentModule()->getBaseDir() . '/config/config.php');        
         
-        $this->imageWidth = $options['rpadv-image-width'];
-        $this->imageHeight = $options['rpadv-image-height'];
-        $this->imageCrop = !empty($options['rpadv-image-crop']) ? '1' : '';
-        $this->refreshTime = $options['rpadv-refresh-time'];
-        $this->advertCount = $options['rpadv-advert-count'];
-        $this->animationSpeed = $options['rpadv-animation-speed'];
-        
-        add_action('admin_menu', array($this, 'adminMenu'));                
+        parent::__construct($config);
+
+        add_action('admin_menu', array($this, 'adminMenu'));                        
+    }
+    
+    public static function getParentModule() {
+       
+        return self::$_parentModule;
     }
 
+    public static function renderSettingsPage() {
+        echo self::getParentModule()->getTemplate('admin/options/layout', self::instance());
+    }    
+    
     public function adminMenu () {
-        add_menu_page('Visual Adverts', 'Visual Adverts', 'manage_options', 'adverts');   
-        if (taxonomy_exists('advert-category')) {
-            add_submenu_page('adverts', 'Categories', 'Categories', 'manage_options', 'edit-tags.php?taxonomy=advert-category&post_type=adverts');                        
-        }    
-        add_submenu_page('adverts', 'Settings', 'Settings', 'administrator', 'adverts-settings', array($this, 'renderSettingsPage'));                
-        register_setting( 'rpadv-settings', 'rpadv_settings', array($this, 'sanitizeSettings') );                
+        parent::adminMenu();
         add_filter( 'parent_file', array($this, 'currentMenu') );        
     }
     
@@ -96,44 +85,77 @@ class RPAdv_Settings extends Agp_Module {
 
         return $parent_file;
 
-    }    
-
-    public function sanitizeSettings ($input) {
-        $output = array();    
-        return array_merge($input, $output);            
-    }            
-
-    public function renderSettingsPage () {
-        echo $this->getTemplate('admin/settings');                    
-    }        
-    
-    public function getOptions() {
-        return get_option( 'rpadv_settings' );
-    }
+    }     
     
     public function getImageWidth() {
-        return $this->imageWidth;
+        $settings = $this->getSettings();
+        return $settings['rpadv_settings']['rpadv-image']['width'];
     }
 
     public function getImageHeight() {
-        return $this->imageHeight;
+        $settings = $this->getSettings();
+        return $settings['rpadv_settings']['rpadv-image']['height'];
     }
 
     public function getImageCrop() {
-        return $this->imageCrop;
+        $settings = $this->getSettings();
+        return !empty($settings['rpadv_settings']['rpadv-image']['crop']) ? 1 : 0;
     }
 
     public function getRefreshTime() {
-        return $this->refreshTime;
+        $settings = $this->getSettings();
+        return $settings['rpadv_settings']['rpadv-refresh-time'];
     }
     
     public function getAdvertCount() {
-        return $this->advertCount;
+        $settings = $this->getSettings();
+        return $settings['rpadv_settings']['rpadv-advert-count'];
     }
 
     public function getAnimationSpeed() {
-        return $this->animationSpeed;
-    }
-
+        $settings = $this->getSettings();
+        return $settings['rpadv_settings']['rpadv-animation-speed'];
+    }    
+    
+    public function getOptions() {
+        $fields = $this->getFields();        
+        
+        $result = array();
+        if ($this->getTabs()) {        
+            foreach ($this->getTabs() as $k => $v) {
+                if (!empty($fields[$k])) {
+                    foreach ($fields[$k]['fields'] as $dk => $dv) {
+                        $options = get_option( $k );
+                        if (!empty($options)) {
+                            if ( isset( $options[$dk] ) ) {
+                                $result[$k][$dk] = $options[$dk];  
+                            } elseif ($dk == 'rpadv-image') {    
+                                if (isset($options['rpadv-image-width'])) {
+                                    $result[$k][$dk]['width'] = $options['rpadv-image-width'];            
+                                } else {
+                                    $result[$k][$dk]['width'] = $dv['default']['width'];            
+                                }
+                                if (isset($options['rpadv-image-height'])) {
+                                    $result[$k][$dk]['height'] = $options['rpadv-image-height'];            
+                                } else {
+                                    $result[$k][$dk]['height'] = $dv['default']['height'];            
+                                }
+                                if (!empty($options['rpadv-image-crop'])) {
+                                    $result[$k][$dk]['crop'] = 1;            
+                                }
+                            } elseif ( isset ( $dv['default'] ) ) {
+                                $result[$k][$dk] = $dv['default'];
+                            }   
+                        } else {
+                            if ( isset ( $dv['default'] ) ) {
+                                $result[$k][$dk] = $dv['default'];
+                            }                               
+                        }
+                    }                    
+                }
+            }    
+        } 
+        return $result;
+    }    
 }
 

@@ -22,12 +22,23 @@ class RPAdv_AdvertWidget extends WP_Widget {
             echo $args['before_title'] . apply_filters( 'widget_title', $instance['title'] ). $args['after_title'];
         }
       
-        RPAdv()->showWidget(array(
-                'id' => $this->id,
-                'term' => !empty($instance['taxonomy_term']) && taxonomy_exists('advert-category') ? $instance['taxonomy_term'] : array(),
-                'color' => !empty($instance['color']) ? $instance['color'] : '',            
-            )
-        );
+        $atts = array();
+        $atts['id'] = $this->id;
+        $atts['term'] = !empty($instance['taxonomy_term']) && taxonomy_exists('advert-category') ? $instance['taxonomy_term'] : array();
+        $atts['color'] = !empty($instance['color']) ? $instance['color'] : '';
+        
+        if (isset($instance['refreshTime'])) {
+            $atts['refreshTime'] = $instance['refreshTime'];    
+        }        
+        if (isset($instance['animationSpeed'])) {
+            $atts['animationSpeed'] = $instance['animationSpeed'];    
+        }        
+        if (isset($instance['advertCount'])) {
+            $atts['advertCount'] = $instance['advertCount'];    
+        }                
+        
+        RPAdv()->showWidget($atts);
+        
         echo $args['after_widget'];
 	}
 
@@ -40,10 +51,16 @@ class RPAdv_AdvertWidget extends WP_Widget {
 		$title = !empty($instance['title']) ? $instance['title'] : '';
         $taxonomy_term = !empty($instance['taxonomy_term']) ? $instance['taxonomy_term'] : '';                
         $color = !empty($instance['color']) ? $instance['color'] : '';
+        $refreshTime = isset($instance['refreshTime']) ? $instance['refreshTime'] : RPAdv()->getSettings()->getRefreshTime();        
+        $animationSpeed = isset($instance['animationSpeed']) ? $instance['animationSpeed'] : RPAdv()->getSettings()->getAnimationSpeed();        
+        $advertCount = isset($instance['advertCount']) ? $instance['advertCount'] : RPAdv()->getSettings()->getAdvertCount();        
     ?>
         <p><?php $this->renderTitleField($title); ?></p>
         <p><?php $this->renderTaxonomyTermField('advert-category', $taxonomy_term); ?></p>        
         <p><?php $this->renderTextColorField($color); ?></p>                
+        <p><?php $this->renderRefreshTimeField($refreshTime); ?></p>                
+        <p><?php $this->renderAnimationSpeedField($animationSpeed); ?></p>                
+        <p><?php $this->renderAdvertCountField($advertCount); ?></p>                
     <?php    
 	}
     
@@ -60,6 +77,10 @@ class RPAdv_AdvertWidget extends WP_Widget {
 		$instance['title'] = (!empty($new_instance['title'])) ? strip_tags( $new_instance['title'] ) : '';
         $instance['taxonomy_term'] = (!empty($new_instance['taxonomy_term'])) ? strip_tags( $new_instance['taxonomy_term'] ) : '';        
         $instance['color'] = (!empty($new_instance['color'])) ? strip_tags( $new_instance['color'] ) : '';        
+        
+        $instance['refreshTime'] = (!empty($new_instance['refreshTime']) || $new_instance['refreshTime'] != '') ? strip_tags( $new_instance['refreshTime'] ) : NULL;        
+        $instance['animationSpeed'] = (!empty($new_instance['animationSpeed']) || $new_instance['animationSpeed'] != '') ? strip_tags( $new_instance['animationSpeed'] ) : NULL;        
+        $instance['advertCount'] = (!empty($new_instance['advertCount']) || $new_instance['advertCount'] != '') ? strip_tags( $new_instance['advertCount'] ) : NULL;        
         
 		return $instance;
 	}    
@@ -103,6 +124,28 @@ class RPAdv_AdvertWidget extends WP_Widget {
     <?php  
         endif;
     }    
+    
+    public function renderRefreshTimeField ( $refreshTime ) {
+    ?>
+        <label for="<?php echo esc_attr( $this->get_field_id( 'refreshTime' ) ); ?>"><?php _e( 'Refresh Time (msec.):' ); ?></label> 
+		<input min="0" class="widefat" id="<?php echo $this->get_field_id( 'refreshTime' ); ?>" name="<?php echo $this->get_field_name( 'refreshTime' ); ?>" type="number" value="<?php echo esc_attr( $refreshTime ); ?>">    
+    <?php            
+    }
+
+    public function renderAnimationSpeedField ( $animationSpeed ) {
+    ?>
+        <label for="<?php echo esc_attr( $this->get_field_id( 'animationSpeed' ) ); ?>"><?php _e( 'Animation Speed (msec.):' ); ?></label> 
+		<input min="0" class="widefat" id="<?php echo $this->get_field_id( 'animationSpeed' ); ?>" name="<?php echo $this->get_field_name( 'animationSpeed' ); ?>" type="number" value="<?php echo esc_attr( $animationSpeed ); ?>">    
+    <?php            
+    }    
+    
+    
+    public function renderAdvertCountField ( $advertCount ) {
+    ?>
+        <label for="<?php echo esc_attr( $this->get_field_id( 'advertCount' ) ); ?>"><?php _e( 'Advert Count:' ); ?></label> 
+		<input min="0" class="widefat" id="<?php echo $this->get_field_id( 'advertCount' ); ?>" name="<?php echo $this->get_field_name( 'advertCount' ); ?>" type="number" value="<?php echo esc_attr( $advertCount ); ?>">    
+    <?php            
+    }        
     
 }
 

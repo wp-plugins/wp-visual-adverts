@@ -25,6 +25,9 @@ class RPAdv extends Agp_Module {
     private $advertRepository;        
     
     
+    private $tmpViewParams;
+    
+    
     /**
      * The single instance of the class 
      * 
@@ -63,7 +66,7 @@ class RPAdv extends Agp_Module {
         
         $this->ajax = RPAdv_Ajax::instance();
         $this->advertRepository = new RPAdv_AdvertRepository();
-        $this->settings = new RPAdv_Settings($this->getBaseDir());
+        $this->settings = RPAdv_Settings::instance( $this );
         
         add_action( 'init', array($this, 'init' ), 999 );        
         add_action( 'wp_enqueue_scripts', array($this, 'enqueueScripts' ) );    
@@ -119,11 +122,10 @@ class RPAdv extends Agp_Module {
             'base_url' => site_url(),         
             'ajax_url' => admin_url( 'admin-ajax.php' ), 
             'ajax_nonce' => wp_create_nonce('ajax_atf_nonce'),        
-            'refreshTime' => $this->settings->getRefreshTime(),
-            'animationSpeed' => $this->settings->getAnimationSpeed(),
-            'advertCountPage' => $this->settings->getAdvertCount(),
+            'refreshTime' => array(),
+            'animationSpeed' => array(),
+            'advertCountPage' => array(),
             'advertCount' => array(),
-            
         ));  
 
         wp_enqueue_style('rpadv-css', $this->getAssetUrl('css/style.css'));                    
@@ -158,9 +160,16 @@ class RPAdv extends Agp_Module {
     
     public function getAdverts() {
         if ($this->getAdvertRepository()->getCount() > 0) {
+            $params = $this->getTmpViewParams();            
+            if (isset($params['advertCount'])) {
+                $maxCount = $params['advertCount'];
+            }
+            
             $result = array();
             $adverts = $this->getAdvertRepository()->shuffleAll();
-            $maxCount = $this->getSettings()->getAdvertCount();
+            if (!isset($maxCount)) {
+                $maxCount = $this->getSettings()->getAdvertCount();    
+            }
             $count = $this->getAdvertRepository()->getCount();
             $count = ($count > $maxCount) ? $maxCount : $count;
             for ( $i = 0; $i < $count; $i++) {
@@ -177,6 +186,10 @@ class RPAdv extends Agp_Module {
         $isAjax = !empty($params['isAjax']) ? 'isAjax' : '';
         $template = !empty($params['isAjax']) ? 'rpadv-widget-list' : 'rpadv-widget';
 
+        $params['refreshTime'] = isset($params['refreshTime']) ? $params['refreshTime'] : $this->settings->getRefreshTime();        
+        $params['animationSpeed'] = isset($params['animationSpeed']) ? $params['animationSpeed'] : $this->settings->getAnimationSpeed();        
+        $params['advertCount'] = isset($params['advertCount']) ? $params['advertCount'] : $this->settings->getAdvertCount();        
+        
         if (!empty($id)) :
             $this->advertRepository->setCategoryFilter($term);
             $this->advertRepository->applyColor($color);
@@ -184,14 +197,27 @@ class RPAdv extends Agp_Module {
         ?>
         <script type="text/javascript">
             ajax_rpadv.advertCount["<?php echo $id;?>"] = <?php echo $this->advertRepository->getCount(); ?>;
+            ajax_rpadv.refreshTime["<?php echo $id;?>"] = <?php echo $params['refreshTime']; ?>;
+            ajax_rpadv.animationSpeed["<?php echo $id;?>"] = <?php echo $params['animationSpeed']; ?>;
+            ajax_rpadv.advertCountPage["<?php echo $id;?>"] = <?php echo $params['advertCount']; ?>;
         </script>
         <?php                
             endif;
             
+            $this->setTmpViewParams($params);
             echo $this->getTemplate($template, $isAjax);                            
-            
+            $this->setTmpViewParams(NULL);
         endif;
         
+    }
+    
+    public function getTmpViewParams() {
+        return $this->tmpViewParams;
+    }
+
+    public function setTmpViewParams($tmpViewParams) {
+        $this->tmpViewParams = $tmpViewParams;
+        return $this;
     }
     
 }
