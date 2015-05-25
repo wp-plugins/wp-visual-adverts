@@ -1,4 +1,12 @@
 (function($) {  
+    $(window).load(function() {
+        $('.main-visual-adverts').each(function() {
+            var id = $(this).closest('.widget_rpadv_widget').eq(0).attr('id');
+            $(this).attr('data-id', id);            
+            $(this).height($(this).find('.visual-adverts.add').outerHeight());
+        });
+    });
+    
     $(document).ready(function() { 
         $('.main-visual-adverts').each(function() {
             var id = $(this).closest('.widget_rpadv_widget').eq(0).attr('id');

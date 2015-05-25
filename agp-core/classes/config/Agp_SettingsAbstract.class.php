@@ -1,4 +1,6 @@
 <?php
+namespace Webcodin\WPVisualAdverts\Core;
+
 /**
  * Settings page abstract class
  */

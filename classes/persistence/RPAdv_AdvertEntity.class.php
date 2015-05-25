@@ -1,4 +1,5 @@
 <?php
+use Webcodin\WPVisualAdverts\Core\Agp_Entity;
 
 class RPAdv_AdvertEntity extends Agp_Entity {
 

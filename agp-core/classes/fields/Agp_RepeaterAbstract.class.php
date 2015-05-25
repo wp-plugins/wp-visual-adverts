@@ -1,4 +1,5 @@
 <?php
+namespace Webcodin\WPVisualAdverts\Core;
 
 abstract class Agp_RepeaterAbstract extends Agp_Module {
     

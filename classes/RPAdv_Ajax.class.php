@@ -1,4 +1,5 @@
 <?php
+use Webcodin\WPVisualAdverts\Core\Agp_AjaxAbstract;
 
 class RPAdv_Ajax extends Agp_AjaxAbstract {
     /**

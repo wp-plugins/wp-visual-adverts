@@ -1,4 +1,5 @@
 <?php
+use Webcodin\WPVisualAdverts\Core\Agp_RepositoryAbstract;
 
 class RPAdv_AdvertRepository extends Agp_RepositoryAbstract {
     

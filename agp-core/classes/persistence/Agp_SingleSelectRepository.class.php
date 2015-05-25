@@ -1,4 +1,5 @@
 <?php
+namespace Webcodin\WPVisualAdverts\Core;
 
 class Agp_SingleSelectRepository extends Agp_RepositoryAbstract {
 

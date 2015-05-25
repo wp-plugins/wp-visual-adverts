@@ -1,4 +1,5 @@
 <?php
+namespace Webcodin\WPVisualAdverts\Core;
 
 class Agp_Session extends Agp_SessionAbstract {
     

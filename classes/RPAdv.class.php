@@ -1,4 +1,5 @@
 <?php
+use Webcodin\WPVisualAdverts\Core\Agp_Module;
 
 class RPAdv extends Agp_Module {
 

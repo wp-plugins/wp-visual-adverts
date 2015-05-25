@@ -1,4 +1,5 @@
 <?php
+use Webcodin\WPVisualAdverts\Core\Agp_SettingsAbstract;
 
 class RPAdv_Settings extends Agp_SettingsAbstract {
     
