@@ -33,7 +33,7 @@ With this plugin you can easily create:
 * Compatible with WooSidebars;
 * Developers have the possibility to customize the plugin by creating a duplicate templates and styles in the active theme folder;
 * **NEW!** Custom options for widgets: text color, ads number, animation options.
-* **NB!** The core of the plugin is changed and optimised for adding a new useful features and we forced to raise the requirements to PHP version on Your web server. **Minimum required PHP version is 5.3.0**.
+* **NB!** The core of the plugin has been changed and optimised for adding a new useful features. We forced to raise the requirements to PHP version on Your web server. **Minimum required PHP version - 5.3.0**.
  
 = Upcoming Updates =
 * ads group shortcode for pages
@@ -153,9 +153,13 @@ Path to the templates folder inside the active theme:
 
 == Changelog ==
 
+= 2.0.1 =
+* Minor changes
+* Changed: Image loading and height calculation for advert widget when a page is first loaded
+
 = 2.0.0 =
 * Changed: The plugin core is optimised for adding a new useful features
-* Changed: Minimum required PHP version is 5.3.0 
+* Changed: Minimum required PHP version - 5.3.0 
 * Fixed: Issue with a height calculation for advert widget when a page is first loaded
 
 = 1.2.0 =
@@ -172,14 +176,14 @@ Path to the templates folder inside the active theme:
 * Updated: plugin description, screenshots & FAQ
 
 = 1.0.3 =
-* Minor bugfixing.
+* Minor bugfixing
 
 = 1.0.2 =
 * Fixed issue: "plugin stops functioning after a few refreshes"
 * Added: multiple widgets contain different adverts after refreshing
 
 = 1.0.1 =
-* Minor bugfixing.
+* Minor bugfixing
 
 = 1.0.0 =
 * Initial release.

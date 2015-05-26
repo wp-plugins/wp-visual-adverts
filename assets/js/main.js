@@ -13,10 +13,8 @@
             $(this).attr('data-id', id);            
             
             $(this).height($(this).find('.visual-adverts.add').outerHeight());
-            
-            if (ajax_rpadv.refreshTime[id] > 0 && ajax_rpadv.advertCount[id] > ajax_rpadv.advertCountPage[id] ) {
-                setTimeout(function() {advertsRefresh(id)}, ajax_rpadv.refreshTime[id]);   
-            }            
+
+            advertsRefresh(id);
         });
         
         function advertsRefresh(id) {

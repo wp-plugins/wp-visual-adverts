@@ -3,6 +3,8 @@ use Webcodin\WPVisualAdverts\Core\Agp_Module;
 
 class RPAdv extends Agp_Module {
 
+    private $version = '2.0.1';
+    
     /**
      * Plugin settings
      * 
@@ -127,6 +129,7 @@ class RPAdv extends Agp_Module {
             'animationSpeed' => array(),
             'advertCountPage' => array(),
             'advertCount' => array(),
+            'version' => $this->getVersion(),
         ));  
 
         wp_enqueue_style('rpadv-css', $this->getAssetUrl('css/style.css'));                    
@@ -201,6 +204,7 @@ class RPAdv extends Agp_Module {
             ajax_rpadv.refreshTime["<?php echo $id;?>"] = <?php echo $params['refreshTime']; ?>;
             ajax_rpadv.animationSpeed["<?php echo $id;?>"] = <?php echo $params['animationSpeed']; ?>;
             ajax_rpadv.advertCountPage["<?php echo $id;?>"] = <?php echo $params['advertCount']; ?>;
+            ajax_rpadv.version["<?php echo $id;?>"] = "<?php echo $this->getVersion(); ?>";
         </script>
         <?php                
             endif;
@@ -219,6 +223,10 @@ class RPAdv extends Agp_Module {
     public function setTmpViewParams($tmpViewParams) {
         $this->tmpViewParams = $tmpViewParams;
         return $this;
+    }
+    
+    public function getVersion() {
+        return $this->version;
     }
     
 }
