@@ -154,7 +154,7 @@ Path to the templates folder inside the active theme:
 == Changelog ==
 
 = 2.0.1 =
-* Minor changes
+* Minor changes 
 * Changed: Image loading and height calculation for advert widget when a page is first loaded
 
 = 2.0.0 =
