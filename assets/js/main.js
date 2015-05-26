@@ -40,7 +40,8 @@
                     $(owner).append(data);
                     
                     $(owner).find('.visual-adverts.add').fadeIn(ajax_rpadv.animationSpeed[id], function () {
-                        $(owner).height($(this).outerHeight());
+                        var height = $(this).outerHeight();
+                        setTimeout(function() {$(owner).height(height);}, 150);   
                     });                    
 
                     $(owner).find('.visual-adverts.remove').fadeOut(ajax_rpadv.animationSpeed[id], function() {
