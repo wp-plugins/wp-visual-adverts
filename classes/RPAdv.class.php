@@ -3,7 +3,7 @@ use Webcodin\WPVisualAdverts\Core\Agp_Module;
 
 class RPAdv extends Agp_Module {
 
-    private $version = '2.0.1';
+    private $version = '2.0.2';
     
     /**
      * Plugin settings

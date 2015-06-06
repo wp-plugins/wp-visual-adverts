@@ -153,6 +153,12 @@ Path to the templates folder inside the active theme:
 
 == Changelog ==
 
+= 2.0.2 =
+* Fixed: Issue with fatal error when trying to activate plugin for PHP 5.3
+* Fixed: Issue for AJAX request with enabled Zlib-compression
+* Changed: Height calculation for advert widget when a advert block is loaded
+* Minor changes of the plugin core
+
 = 2.0.1 =
 * Minor changes 
 * Changed: Image loading and height calculation for advert widget when a page is first loaded

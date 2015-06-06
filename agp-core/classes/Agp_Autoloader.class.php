@@ -120,7 +120,15 @@ class Agp_Autoloader {
      */
     private function rglob($pattern, $flags = 0) {
         $files = glob($pattern, $flags); 
-        foreach (glob(dirname($pattern).'/*', GLOB_ONLYDIR|GLOB_NOSORT) as $dir) {
+        $glob_files = glob(dirname($pattern).'/*', GLOB_ONLYDIR|GLOB_NOSORT);
+        if ($files === FALSE) {
+            $files = array();
+        }
+        if ($glob_files === FALSE) {
+            $glob_files = array();
+        }        
+
+        foreach ($glob_files as $dir) {
             $files = array_merge($files, $this->rglob($dir.'/'.basename($pattern), $flags));
         }
         return $files;
@@ -132,7 +140,7 @@ class Agp_Autoloader {
 
     public function setClassMap($classMap) {
         if (is_array($classMap)) {
-            $this->classMap = array_merge($this->classMap, $classMap);
+            $this->classMap = array_merge_recursive($this->classMap, $classMap);
         }
         
         return $this;
