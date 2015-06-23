@@ -1,17 +1,17 @@
-=== WCP Visual Adverts ===
+=== WP Visual Adverts ===
 Contributors: webcodin
 Tags: ad, ads, advert, adverts, visual adverts, widget, sidebar, ajax, WooSidebars, groups, categories
 Requires at least: 3.5.0
 Tested up to: 4.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
-Stable tag: 2.0.2
+Stable tag: trunk
 
-WCP Visual Adverts plugin allows you to quickly and easily create ads to display in the sidebar of your site.
+WP Visual Adverts plugin allows you to quickly and easily create ads to display in the sidebar of your site.
 
 == Description ==
 
-WCP Visual Adverts plugin allows you to quickly and easily create different types of advertisements and group them into categories to display in the sidebar of your site.
+WP Visual Adverts plugin allows you to quickly and easily create different types of advertisements and group them into categories to display in the sidebar of your site.
 
 With this plugin you can easily create:
 
@@ -93,7 +93,7 @@ Create a new ad, fill all necessary fields in including "link" field and save ad
 
 = Widgets =
 
-To add a widget to the sidebar, go to the menu: "Appearance"> "Widgets", select widgets "WCP Visual Adverts" and drag it to the desired sidebar.
+To add a widget to the sidebar, go to the menu: "Appearance"> "Widgets", select widgets "WP Visual Adverts" and drag it to the desired sidebar.
 
 Following options are available for configuring in the widget:
 
@@ -158,7 +158,6 @@ Path to the templates folder inside the active theme:
 = 2.0.3 =
 * Fixed: Issue "Ads not displaying" for some themes
 * Changed: Default "Animation Speed" value increased to 1000 msec. for more stability (Please, change this value manually in existing widget, if it actually for You).
-* Changed: Display plugin name
 * Added: Link to live demo site in description of the plugin
 
 = 2.0.2 =

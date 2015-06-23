@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name: WCP Visual Adverts
+ * Plugin Name: WP Visual Adverts
  * Plugin URI: https://wordpress.org/plugins/wp-visual-adverts/
  * Description: A plugin for WordPress that let you add visual adverts to sidebars
  * Version: 2.0.3

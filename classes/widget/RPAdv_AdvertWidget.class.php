@@ -7,7 +7,7 @@ class RPAdv_AdvertWidget extends WP_Widget {
 	 */
 	public function __construct() {
 		$widget_ops = array( 'description' => __( "Adds visual adverts to sidebar") );
-		parent::__construct('rpadv_widget', __('WCP Visual Adverts'), $widget_ops);
+		parent::__construct('rpadv_widget', __('WP Visual Adverts'), $widget_ops);
 	}
     
 	/**
