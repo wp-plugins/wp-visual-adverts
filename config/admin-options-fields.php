@@ -32,7 +32,7 @@ return array(
             'rpadv-animation-speed' => array(
                 'type' => 'number',
                 'label' => 'Animation Speed (msec.)',
-                'default' => 400,
+                'default' => 1000,
                 'section' => 'defaults',
                 'class' => 'text',
                 'note' => '',

@@ -210,7 +210,7 @@ class RPAdv extends Agp_Module {
             endif;
             
             $this->setTmpViewParams($params);
-            echo $this->getTemplate($template, $isAjax);                            
+            echo $this->getTemplate($template, $params);                            
             $this->setTmpViewParams(NULL);
         endif;
         

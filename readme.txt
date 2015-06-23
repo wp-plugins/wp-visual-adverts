@@ -1,4 +1,4 @@
-=== WP Visual Adverts ===
+=== WCP Visual Adverts ===
 Contributors: webcodin
 Tags: ad, ads, advert, adverts, visual adverts, widget, sidebar, ajax, WooSidebars, groups, categories
 Requires at least: 3.5.0
@@ -7,19 +7,22 @@ License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Stable tag: trunk
 
-WP Visual Adverts plugin allows you to quickly and easily create ads to display in the sidebar of your site.
+WCP Visual Adverts plugin allows you to quickly and easily create ads to display in the sidebar of your site.
 
 == Description ==
 
-WP Visual Adverts plugin allows you to quickly and easily create different types of advertisements and group them into categories to display in the sidebar of your site.
+WCP Visual Adverts plugin allows you to quickly and easily create different types of advertisements and group them into categories to display in the sidebar of your site.
 
 With this plugin you can easily create:
 
+* Various promotional ads;
 * Featured news for your blog or news portal;
 * Banners with discount / sale / campaign for your store;
 * Advertisements with links to your partners;
 * Interesting headlines with pictures to share with your community;
 * ... and much more.
+
+You can find [live demo](http://wpdemo.webcodin.com/wordpress-plugin-wcp-visual-adverts/) on our site.
 
 = Features =
 
@@ -90,7 +93,7 @@ Create a new ad, fill all necessary fields in including "link" field and save ad
 
 = Widgets =
 
-To add a widget to the sidebar, go to the menu: "Appearance"> "Widgets", select widgets "WP Visual Adverts" and drag it to the desired sidebar.
+To add a widget to the sidebar, go to the menu: "Appearance"> "Widgets", select widgets "WCP Visual Adverts" and drag it to the desired sidebar.
 
 Following options are available for configuring in the widget:
 
@@ -152,6 +155,11 @@ Path to the templates folder inside the active theme:
 9. Admin Panel :: Widgets Options
 
 == Changelog ==
+= 2.0.3 =
+* Fixed: Issue "Ads not displaying" for some themes
+* Changed: Default "Animation Speed" value increased to 1000 msec. for more stability (Please, change this value manually in existing widget, if it actually for You).
+* Changed: Display plugin name
+* Added: Link to live demo site in description of the plugin
 
 = 2.0.2 =
 * Fixed: Issue with fatal error when trying to activate plugin for PHP 5.3

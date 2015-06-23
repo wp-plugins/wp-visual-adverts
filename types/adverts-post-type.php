@@ -14,7 +14,7 @@ function rpadv_adverts_init() {
       'not_found'          => __('No Adverts Found', 'rpadv'),
       'not_found_in_trash' => __('No Adverts Found in Trash', 'rpadv'),
       'parent_item_colon'  => '',
-      'menu_name'          => __('WP Visual Adverts', 'rpadv')
+      'menu_name'          => __('WCP Visual Adverts', 'rpadv')
     );
 
     $args = array(
