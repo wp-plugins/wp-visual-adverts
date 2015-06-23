@@ -5,7 +5,7 @@ Requires at least: 3.5.0
 Tested up to: 4.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
-Stable tag: trunk
+Stable tag: 2.0.2
 
 WCP Visual Adverts plugin allows you to quickly and easily create ads to display in the sidebar of your site.
 
