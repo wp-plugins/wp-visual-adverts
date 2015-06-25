@@ -22,8 +22,8 @@
         data.action = 'advertsRefresh';
         data.nonce = ajax_rpadv.ajax_nonce;
         data.id = id;
-
-
+        data.index = ajax_rpadv.index[id];
+        
         $.ajax({
             url: ajax_rpadv.ajax_url,
             type: 'POST' ,
@@ -33,6 +33,8 @@
             success: function(data) {
                 $(owner).find('.visual-adverts').addClass('remove');
                 $(owner).append(data);
+
+                ajax_rpadv.index[id] = $(owner).find('.visual-adverts.add').data('index');
 
                 $(owner).find('.visual-adverts.add').fadeIn(ajax_rpadv.animationSpeed[id], function () {
                     $(owner).find('.visual-adverts.remove').remove();                    

@@ -7,6 +7,8 @@ class RPAdv_AdvertRepository extends Agp_RepositoryAbstract {
 
     private $categoryFilter = array();
     
+    private $index;
+    
     public function init() {
     }
     
@@ -93,7 +95,7 @@ class RPAdv_AdvertRepository extends Agp_RepositoryAbstract {
     }
     
     public function getAll () {
-        return $this->applyCategoryFilter(parent::getAll());
+        return array_values($this->applyCategoryFilter(parent::getAll())); 
     }
 
     public function getFirst () {
@@ -107,4 +109,12 @@ class RPAdv_AdvertRepository extends Agp_RepositoryAbstract {
         return count($this->getAll());
     }        
     
+    public function getIndex() {
+        return $this->index;
+    }
+
+    public function setIndex($index) {
+        $this->index = $index;
+        return $this;
+    }
 }

@@ -3,7 +3,7 @@ use Webcodin\WPVisualAdverts\Core\Agp_Module;
 
 class RPAdv extends Agp_Module {
 
-    private $version = '2.0.2';
+    private $version = '2.0.4';
     
     /**
      * Plugin settings
@@ -130,6 +130,7 @@ class RPAdv extends Agp_Module {
             'advertCountPage' => array(),
             'advertCount' => array(),
             'version' => $this->getVersion(),
+            'index' => array(),
         ));  
 
         wp_enqueue_style('rpadv-css', $this->getAssetUrl('css/style.css'));                    
@@ -164,20 +165,41 @@ class RPAdv extends Agp_Module {
     
     public function getAdverts() {
         if ($this->getAdvertRepository()->getCount() > 0) {
+            $result = array();
             $params = $this->getTmpViewParams();            
+            
             if (isset($params['advertCount'])) {
                 $maxCount = $params['advertCount'];
             }
-            
-            $result = array();
-            $adverts = $this->getAdvertRepository()->shuffleAll();
+
             if (!isset($maxCount)) {
                 $maxCount = $this->getSettings()->getAdvertCount();    
             }
-            $count = $this->getAdvertRepository()->getCount();
-            $count = ($count > $maxCount) ? $maxCount : $count;
+            
+            $index = !empty($params['index']) ? $params['index'] : 0;
+
+            $adverts = $this->getAdvertRepository()->getAll();
+            $allCount = $this->getAdvertRepository()->getCount();
+            $count = ($allCount > $maxCount) ? $maxCount : $allCount;
+            
             for ( $i = 0; $i < $count; $i++) {
-                $result[] = $adverts[$i];
+                if ($index >= $allCount ) {
+                    $index = 0;
+                }
+                
+                if (!empty($adverts[$index])) {
+                    $result[] = $adverts[$index];
+                    $index++;                    
+                } else {
+                    $index = 0;
+                }
+            }
+            
+            $this->getAdvertRepository()->setIndex($index);
+            
+            if (!empty($result)) {
+                srand((float)microtime() * 1000000);
+                shuffle($result);
             }
             return $result;            
         }
@@ -189,12 +211,14 @@ class RPAdv extends Agp_Module {
         $color = !empty($params['color']) ? $params['color'] : '';        
         $isAjax = !empty($params['isAjax']) ? 'isAjax' : '';
         $template = !empty($params['isAjax']) ? 'rpadv-widget-list' : 'rpadv-widget';
-
+        
         $params['refreshTime'] = isset($params['refreshTime']) ? $params['refreshTime'] : $this->settings->getRefreshTime();        
         $params['animationSpeed'] = isset($params['animationSpeed']) ? $params['animationSpeed'] : $this->settings->getAnimationSpeed();        
         $params['advertCount'] = isset($params['advertCount']) ? $params['advertCount'] : $this->settings->getAdvertCount();        
         
+        $params['index'] = !empty($params['index']) ? $params['index'] : 0;        
         if (!empty($id)) :
+            $this->advertRepository->setIndex($params['index']);
             $this->advertRepository->setCategoryFilter($term);
             $this->advertRepository->applyColor($color);
             if (empty($isAjax)) :
@@ -206,7 +230,7 @@ class RPAdv extends Agp_Module {
             ajax_rpadv.advertCountPage["<?php echo $id;?>"] = <?php echo $params['advertCount']; ?>;
             ajax_rpadv.version["<?php echo $id;?>"] = "<?php echo $this->getVersion(); ?>";
         </script>
-        <?php                
+        <?php
             endif;
             
             $this->setTmpViewParams($params);

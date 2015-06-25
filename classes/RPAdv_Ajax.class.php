@@ -47,6 +47,7 @@ class RPAdv_Ajax extends Agp_AjaxAbstract {
         
         $params = array(
             'id' => $data['id'],
+            'index' => $data['index'],
             'isAjax' => TRUE,
         );
         

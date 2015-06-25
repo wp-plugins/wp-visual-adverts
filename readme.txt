@@ -155,6 +155,9 @@ Path to the templates folder inside the active theme:
 9. Admin Panel :: Widgets Options
 
 == Changelog ==
+= 2.0.4 =
+* Changed: Rule of random selection for adverts.
+
 = 2.0.3 =
 * Fixed: Issue "Ads not displaying" for some themes
 * Changed: Default "Animation Speed" value increased to 1000 msec. for more stability (Please, change this value manually in existing widget, if it actually for You).
