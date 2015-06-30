@@ -155,6 +155,11 @@ Path to the templates folder inside the active theme:
 9. Admin Panel :: Widgets Options
 
 == Changelog ==
+
+= 2.1.0 =
+* changed: layout of the "Settings" page
+* added: notes for a parameters on the "Settings" page tabs
+
 = 2.0.4 =
 * Changed: Rule of random selection for adverts.
 

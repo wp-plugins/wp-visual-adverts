@@ -33,6 +33,6 @@
         <input min="0" step="1" type="number" class="small-text" name="rpadv_settings[rpadv-image][height]" value="<?php echo $value['height'];?>"  />
         <input type="checkbox" value="1" name="rpadv_settings[rpadv-image][crop]" <?php echo checked( 1, (isset($value['crop'])) ? 1 : '' , false ); ?> >
         <label for="rpadv_settings[rpadv-image][crop]">Crop thumbnail to exact dimensions</label>                                
-        
+        <?php if (!empty($note)): ?><p class="description"><?php echo $note;?></p><?php endif;?>        
     </td>
 </tr>    

@@ -1,6 +1,6 @@
 <?php
 return array(
     'rpadv_settings' => array(
-        'title' => 'Advert Settings',
+        'title' => 'General Settings',
     ),
 );
