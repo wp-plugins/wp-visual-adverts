@@ -3,7 +3,7 @@ use Webcodin\WPVisualAdverts\Core\Agp_Module;
 
 class RPAdv extends Agp_Module {
 
-    private $version = '2.0.4';
+    private $version = '2.2.0';
     
     /**
      * Plugin settings
@@ -120,20 +120,20 @@ class RPAdv extends Agp_Module {
     }
     
     public function enqueueScripts () {
-        wp_enqueue_script( 'rpadv', $this->getAssetUrl('js/main.js'), array('jquery') );                                                         
+        wp_register_script( 'rpadv', $this->getAssetUrl('js/main.js'), array('jquery') );                                                         
         wp_localize_script( 'rpadv', 'ajax_rpadv', array( 
             'base_url' => site_url(),         
             'ajax_url' => admin_url( 'admin-ajax.php' ), 
             'ajax_nonce' => wp_create_nonce('ajax_atf_nonce'),        
-            'refreshTime' => array(),
-            'animationSpeed' => array(),
-            'advertCountPage' => array(),
-            'advertCount' => array(),
-            'version' => $this->getVersion(),
-            'index' => array(),
         ));  
 
-        wp_enqueue_style('rpadv-css', $this->getAssetUrl('css/style.css'));                    
+        wp_register_style('rpadv-css', $this->getAssetUrl('css/style.css'));                    
+        
+        $InFooterScript = $this->settings->getInFooterScript();
+        if (empty($InFooterScript)) {
+            wp_enqueue_script( 'rpadv' );         
+            wp_enqueue_style( 'rpadv-css' );         
+        }        
     }        
     
     
@@ -206,6 +206,13 @@ class RPAdv extends Agp_Module {
     }    
     
     public function showWidget ($params) {
+        
+        $InFooterScript = $this->settings->getInFooterScript();
+        if (!empty($InFooterScript)) {
+            wp_enqueue_script( 'rpadv' );         
+            wp_enqueue_style( 'rpadv-css' );         
+        }                
+        
         $id = !empty($params['id']) ? $params['id'] : '';
         $term = !empty($params['term']) ? $params['term'] : '';
         $color = !empty($params['color']) ? $params['color'] : '';        
@@ -224,11 +231,15 @@ class RPAdv extends Agp_Module {
             if (empty($isAjax)) :
         ?>
         <script type="text/javascript">
-            ajax_rpadv.advertCount["<?php echo $id;?>"] = <?php echo $this->advertRepository->getCount(); ?>;
-            ajax_rpadv.refreshTime["<?php echo $id;?>"] = <?php echo $params['refreshTime']; ?>;
-            ajax_rpadv.animationSpeed["<?php echo $id;?>"] = <?php echo $params['animationSpeed']; ?>;
-            ajax_rpadv.advertCountPage["<?php echo $id;?>"] = <?php echo $params['advertCount']; ?>;
-            ajax_rpadv.version["<?php echo $id;?>"] = "<?php echo $this->getVersion(); ?>";
+            if (typeof rpadv_settings == 'undefined') {
+                var rpadv_settings = {advertCount:[],refreshTime:[],animationSpeed:[],advertCountPage:[],version:[],index:[]};
+            }
+            rpadv_settings.advertCount["<?php echo $id;?>"] = <?php echo $this->advertRepository->getCount(); ?>;
+            rpadv_settings.refreshTime["<?php echo $id;?>"] = <?php echo $params['refreshTime']; ?>;
+            rpadv_settings.animationSpeed["<?php echo $id;?>"] = <?php echo $params['animationSpeed']; ?>;
+            rpadv_settings.advertCountPage["<?php echo $id;?>"] = <?php echo $params['advertCount']; ?>;
+            rpadv_settings.version["<?php echo $id;?>"] = "<?php echo $this->getVersion(); ?>";
+            rpadv_settings.index["<?php echo $id;?>"] = "";
         </script>
         <?php
             endif;

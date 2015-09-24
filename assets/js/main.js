@@ -1,3 +1,6 @@
+if (typeof rpadv_settings == 'undefined') {
+    var rpadv_settings = {advertCount:[],refreshTime:[],animationSpeed:[],advertCountPage:[],version:[],index:[]};
+}
 (function($) {  
     $(window).load(function() {
         $('.main-visual-adverts').each(function() {
@@ -22,7 +25,7 @@
         data.action = 'advertsRefresh';
         data.nonce = ajax_rpadv.ajax_nonce;
         data.id = id;
-        data.index = ajax_rpadv.index[id];
+        data.index = rpadv_settings.index[id];
         
         $.ajax({
             url: ajax_rpadv.ajax_url,
@@ -34,20 +37,20 @@
                 $(owner).find('.visual-adverts').addClass('remove');
                 $(owner).append(data);
 
-                ajax_rpadv.index[id] = $(owner).find('.visual-adverts.add').data('index');
+                rpadv_settings.index[id] = $(owner).find('.visual-adverts.add').data('index');
 
-                $(owner).find('.visual-adverts.add').fadeIn(ajax_rpadv.animationSpeed[id], function () {
+                $(owner).find('.visual-adverts.add').fadeIn(rpadv_settings.animationSpeed[id], function () {
                     $(owner).find('.visual-adverts.remove').remove();                    
                     var height = $(this).outerHeight();
                     $(owner).height(height);
                 });                    
 
-                $(owner).find('.visual-adverts.remove').fadeOut(ajax_rpadv.animationSpeed[id], function() {
+                $(owner).find('.visual-adverts.remove').fadeOut(rpadv_settings.animationSpeed[id], function() {
                     $(this).remove();  
                 });                    
 
-                if (ajax_rpadv.refreshTime[id] > 0 && ajax_rpadv.advertCount[id] > ajax_rpadv.advertCountPage[id] ) {
-                    setTimeout(function() {advertsRefresh(id)}, ajax_rpadv.refreshTime[id]);   
+                if (rpadv_settings.refreshTime[id] > 0 && rpadv_settings.advertCount[id] > rpadv_settings.advertCountPage[id] ) {
+                    setTimeout(function() {advertsRefresh(id)}, rpadv_settings.refreshTime[id]);   
                 }
             },
             error: function (request, status, error) {

@@ -117,6 +117,11 @@ class RPAdv_Settings extends Agp_SettingsAbstract {
         $settings = $this->getSettings();
         return $settings['rpadv_settings']['rpadv-animation-speed'];
     }    
+
+    public function getInFooterScript() {
+        $settings = $this->getSettings();
+        return $settings['rpadv_settings']['scripts_in_footer'];
+    }        
     
     public function getOptions() {
         $fields = $this->getFields();        
@@ -130,6 +135,8 @@ class RPAdv_Settings extends Agp_SettingsAbstract {
                         if (!empty($options)) {
                             if ( isset( $options[$dk] ) ) {
                                 $result[$k][$dk] = $options[$dk];  
+                            } elseif ($dv['type'] !== 'checkbox' && isset ( $dv['default'])) {
+                                $result[$k][$dk] = $dv['default'];
                             } elseif ($dk == 'rpadv-image') {    
                                 if (isset($options['rpadv-image-width'])) {
                                     $result[$k][$dk]['width'] = $options['rpadv-image-width'];            

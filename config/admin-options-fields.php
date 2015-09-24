@@ -5,6 +5,9 @@ return array(
             'defaults' => array(
                 'label' => '',
             ),            
+            'other_settings' => array(
+                'label' => 'Other Settings',
+            ),                                    
         ),
         'fields' => array(
             'rpadv-image' => array(
@@ -52,6 +55,14 @@ return array(
                     'min' => 0,
                 ),             
             ),            
+            'scripts_in_footer' => array(
+                'type' => 'checkbox',
+                'label' => 'Footer Scripts',
+                'default' => 0,
+                'section' => 'other_settings',
+                'note' => 'option allows to enqueue scripts and styles only for the pages with adverts',
+                'class' => '',
+            ),
         ),
     ),
 );

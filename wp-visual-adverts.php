@@ -3,7 +3,7 @@
  * Plugin Name: WP Visual Adverts
  * Plugin URI: https://wordpress.org/plugins/wp-visual-adverts/
  * Description: A plugin for WordPress that let you add visual adverts to sidebars
- * Version: 2.1.0
+ * Version: 2.2.0
  * Author: Webcodin
  * Author URI: https://profiles.wordpress.org/webcodin/
  * License: GPL2
@@ -47,13 +47,19 @@ function rpadv_activate_plugin() {
     if (class_exists('Webcodin\WPVisualAdverts\Core\Agp_Autoloader') && !function_exists('RPAdv')) {
         $autoloader = Agp_Autoloader::instance();
         $autoloader->setClassMap(array(
-            __DIR__ => array('classes'),
+            'paths' => array(
+                __DIR__ => array('classes'),
+            ),
             'namespaces' => array(
                 'Webcodin\WPVisualAdverts\Core' => array(
                     __DIR__ => array('agp-core'),
                 ),
             ),
+            'classmaps' => array (
+                __DIR__ => 'classmap.json',
+            ),
         ));
+        //$autoloader->generateClassMap(__DIR__);
 
         function RPAdv() {
             return RPAdv::instance();

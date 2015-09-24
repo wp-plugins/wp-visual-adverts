@@ -2,7 +2,7 @@
 Contributors: webcodin
 Tags: ad, ads, advert, adverts, visual adverts, widget, sidebar, ajax, WooSidebars, groups, categories
 Requires at least: 3.5.0
-Tested up to: 4.2
+Tested up to: 4.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Stable tag: trunk
@@ -35,9 +35,10 @@ You can find [live demo](http://wpdemo.webcodin.com/wordpress-plugin-wcp-visual-
 * Uses the default theme styling;
 * Compatible with WooSidebars;
 * Developers have the possibility to customize the plugin by creating a duplicate templates and styles in the active theme folder;
-* **NEW!** Custom options for widgets: text color, ads number, animation options.
-* **NB!** The core of the plugin has been changed and optimised for adding a new useful features. We forced to raise the requirements to PHP version on Your web server. **Minimum required PHP version - 5.3.0**.
- 
+* Custom options for widgets: text color, ads number, animation options.
+* Minimum required PHP version is **5.3.0**;
+* **NEW!** Optional ability to enqueue scripts and styles only for the pages with adverts. Just go to the plugin settings and enable "footer scripts" option, save settings and check the results. 
+
 = Upcoming Updates =
 * ads group shortcode for pages
 * statistic per click
@@ -155,6 +156,10 @@ Path to the templates folder inside the active theme:
 9. Admin Panel :: Widgets Options
 
 == Changelog ==
+
+= 2.2.0 =
+* added: Optional ability to enqueue scripts and styles only for the pages with contact form
+* changed: Minor loading speed optimization
 
 = 2.1.0 =
 * changed: layout of the "Settings" page
