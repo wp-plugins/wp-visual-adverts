@@ -158,7 +158,7 @@ Path to the templates folder inside the active theme:
 == Changelog ==
 
 = 2.2.0 =
-* added: Optional ability to enqueue scripts and styles only for the pages with contact form
+* added: Optional ability to enqueue scripts and styles only for the pages with adverts
 * changed: Minor loading speed optimization
 
 = 2.1.0 =
